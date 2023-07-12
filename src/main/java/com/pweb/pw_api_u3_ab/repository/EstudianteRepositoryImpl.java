@@ -2,7 +2,7 @@ package com.pweb.pw_api_u3_ab.repository;
 
 import org.springframework.stereotype.Repository;
 
-
+import com.pweb.pw_api_u3_ab.repository.modelo.Estudiante;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -18,10 +18,13 @@ public class EstudianteRepositoryImpl implements IEstudianteRepository {
 
     @Override
     public Estudiante seleccionarPorcedula(String cedula) {
-        // TODO Auto-generated method stub
-        TypedQuery<Estudiante> myQuery = this.entitymanager.createQuery("SELECT r FROM  Estudiante r WHERE r.cedula =:datoCedula",Estudiante.class);
-        myQuery.setParameter("datoCedula", cedula);
-        return myQuery.getSingleResult();
+        
+   
+
+        TypedQuery<Estudiante> myQuery = this.entitymanager
+        .createQuery("SELECT e FROM Estudiante e WHERE e.cedula = :datoCedula", Estudiante.class);
+            myQuery.setParameter("datoCedula", cedula);
+            return myQuery.getSingleResult();
     }
 
 
