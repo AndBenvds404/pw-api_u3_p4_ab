@@ -14,12 +14,18 @@ public class EstudianteServiceImpl implements IEstudianteService {
 
     @Override
     public Estudiante seleccionarPorCedula(String cedula) {
-        
+       
         return this.estudianteRepository.seleccionarPorcedula(cedula);
     }
 
-  
-
-
-    
+    @Override
+    public void guardar(Estudiante estudiante) {
+        
+        this.estudianteRepository.insertar(estudiante);
+    }
 }
+
+
+
+
+

@@ -6,6 +6,8 @@ public interface IEstudianteService {
 
    public Estudiante seleccionarPorCedula(String cedula);
 
+   public void guardar(Estudiante estudiante);
+
     
     
 }
