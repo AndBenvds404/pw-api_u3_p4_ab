@@ -34,7 +34,14 @@ public class Estudiante {
     @Column(name = "estu_cedula")
     private String cedula;
 
+    @Column(name = "estu_provincia")
+    private String provincia;
+
+
     // Getters y Setters
+
+    
+
     public Integer getId() {
         return id;
     }
@@ -73,5 +80,13 @@ public class Estudiante {
 
     public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
 }

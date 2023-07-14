@@ -1,5 +1,7 @@
 package com.pweb.pw_api_u3_ab.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,23 @@ public class EstudianteServiceImpl implements IEstudianteService {
     public void guardar(Estudiante estudiante) {
         
         this.estudianteRepository.insertar(estudiante);
+    }
+
+    @Override
+    public void actualizar(Estudiante estudiante) {
+       
+        this.estudianteRepository.actualizar(estudiante);
+    }
+
+    @Override
+    public void eliminar(Integer id) {
+        
+        this.estudianteRepository.borrar(id);
+    }
+
+    @Override
+    public List<Estudiante> buscarTodos(String provincia) {
+        return this.estudianteRepository.buscarTodos(provincia);
     }
 }
 
