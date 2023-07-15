@@ -34,29 +34,28 @@ public class EstudianteConotrollerResFull {
     @Autowired
     private IEstudianteService estudianteService;
 
-    @GetMapping(path="/buscar/{cedula}")
+    @GetMapping(path="/{cedula}")
     public Estudiante consultarPorCedula(@PathVariable String cedula){
         
          return this.estudianteService.seleccionarPorCedula(cedula);
-        
-   
+           
     }
 
 
-    @PostMapping(path = "/guardar")
+    @PostMapping
     public void guardar(@RequestBody Estudiante estudiante){
         this.estudianteService.guardar(estudiante);
 
     }
 
-    @PutMapping(path = "/actualizar/{identificador}")
+    @PutMapping(path = "/{identificador}")
     public void actualizar(@RequestBody Estudiante estudiante, @PathVariable Integer identificador ){
         
         estudiante.setId(identificador);
         this.estudianteService.actualizar(estudiante);
     }
 
-    @PatchMapping(path = "/actualizarParcial/{identificador}")
+    @PatchMapping(path = "/{identificador}")
     public void actualizarParcial(@RequestBody Estudiante estudiante, @PathVariable Integer identificador){
          
         estudiante.setId(identificador);
@@ -68,7 +67,7 @@ public class EstudianteConotrollerResFull {
 
     }
 
-    @DeleteMapping(path = "/borrar/{id}")
+    @DeleteMapping(path = "/{id}")
     public void borrar(@PathVariable Integer id){
         this.estudianteService.eliminar(id);
     }
@@ -76,8 +75,14 @@ public class EstudianteConotrollerResFull {
 
     //buscar todos y devolver una lista
 
+
     @GetMapping(path = "/buscarTodos/{provincia}")
-    public List<Estudiante> buscarTodos(@RequestParam String provincia){
-        return this.estudianteService.buscarTodos(provincia);
+        public List<Estudiante> buscarTodos(@PathVariable String provincia){
+        return this.estudianteService.buscarTodos();
+    }
+
+    @GetMapping(path = "/buscarTodosProvincia")
+        public List<Estudiante> buscarProvincia(@RequestParam String provincia){
+        return this.estudianteService.buscarTodosProvincia(provincia);
     }
 }
