@@ -13,7 +13,7 @@ public interface IEstudianteService {
 
     public void actualizar (Estudiante estudiante);
     
-  //  public void actualizarParcial(String cedula, String nuevaCedula);
+    public void actualizarParcial(String cedula, String nuevaCedula);
 
     public void eliminar (Integer id);
 

@@ -3,6 +3,9 @@ package com.pweb.pw_api_u3_ab.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -34,10 +37,23 @@ public class EstudianteConotrollerResFull {
     @Autowired
     private IEstudianteService estudianteService;
 
+    //GET
     @GetMapping(path="/{cedula}")
-    public Estudiante consultarPorCedula(@PathVariable String cedula){
+    
+    public ResponseEntity<Estudiante> consultarPorCedula(@PathVariable String cedula){
         
-         return this.estudianteService.seleccionarPorCedula(cedula);
+         //return this.estudianteService.seleccionarPorCedula(cedula);
+         return ResponseEntity.status(227).body(this.estudianteService.seleccionarPorCedula(cedula));
+           
+    }
+
+    //ejemplo
+     @GetMapping(path="/status/{cedula}")
+    
+    public ResponseEntity<Estudiante> consultarPorCedulaStatus(@PathVariable String cedula){
+        
+         //return this.estudianteService.seleccionarPorCedula(cedula);
+         return ResponseEntity.status(HttpStatus.OK).body(this.estudianteService.seleccionarPorCedula(cedula));
            
     }
 
@@ -63,7 +79,7 @@ public class EstudianteConotrollerResFull {
         Estudiante estudiante2 =this.estudianteService.seleccionarPorCedula(cedula);
        
         estudiante2.setCedula(estudiante.getCedula());
-        this.estudianteService.actualizar(estudiante2);
+        this.estudianteService.actualizarParcial(cedula, cedula);
 
     }
 
@@ -74,11 +90,14 @@ public class EstudianteConotrollerResFull {
     
 
     //buscar todos y devolver una lista
-
-
-    @GetMapping(path = "/buscarTodos/{provincia}")
-        public List<Estudiante> buscarTodos(@PathVariable String provincia){
-        return this.estudianteService.buscarTodos();
+    @GetMapping(path = "/buscarTodos")
+        public ResponseEntity <List<Estudiante>> buscarTodos(){
+            
+        //return this.estudianteService.buscarTodos();
+            HttpHeaders cabecera = new HttpHeaders();
+            cabecera.add("DetalleMensaje", "Ciudadano consultado Exitosamente"); //(identificador, contenido )
+            cabecera.add("valorApi", "Incalculable");
+        return new ResponseEntity<List<Estudiante>>(this.estudianteService.buscarTodos(), cabecera, 228);
     }
 
     @GetMapping(path = "/buscarTodosProvincia")

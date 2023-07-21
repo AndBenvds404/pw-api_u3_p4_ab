@@ -45,8 +45,13 @@ public class EstudianteServiceImpl implements IEstudianteService {
 
     @Override
     public List<Estudiante> buscarTodos() {
-        // TODO Auto-generated method stub
+        
         return this.estudianteRepository.buscarTodos();
+    }
+
+    @Override
+    public void actualizarParcial(String cedula, String nuevaCedula) {
+        this.estudianteRepository.actualizarParcial(cedula, nuevaCedula);
     }
 }
 
