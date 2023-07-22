@@ -9,6 +9,7 @@ public interface IEstudianteRepository {
     public Estudiante seleccionarPorcedula(String cedula);
 
     public void insertar(Estudiante estudiante);
+    public Integer insertarDevolver(Estudiante estudiante);
 
     public void actualizar(Estudiante estudiante);
 

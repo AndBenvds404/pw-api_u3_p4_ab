@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pweb.pw_api_u3_ab.repository.modelo.Estudiante;
@@ -38,8 +40,7 @@ public class EstudianteConotrollerResFull {
     private IEstudianteService estudianteService;
 
     //GET
-    @GetMapping(path="/{cedula}")
-    
+    @GetMapping(path="/{cedula}",produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<Estudiante> consultarPorCedula(@PathVariable String cedula){
         
          //return this.estudianteService.seleccionarPorCedula(cedula);
@@ -47,18 +48,35 @@ public class EstudianteConotrollerResFull {
            
     }
 
+    //post y get
+
+    @PostMapping(path = "/buscarDevolver", consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
+    public String consultarDevolder(@RequestBody Estudiante estudiante){
+        return this.estudianteService.guardarDevolver(estudiante);
+    }
+
     //ejemplo
-     @GetMapping(path="/status/{cedula}")
+     @GetMapping(path="/status/{cedula}") //no se debe colorcar status ()
     
-    public ResponseEntity<Estudiante> consultarPorCedulaStatus(@PathVariable String cedula){
+    public ResponseEntity<Estudiante> consultarPorCedulaStatusEj(@PathVariable String cedula){
         
          //return this.estudianteService.seleccionarPorCedula(cedula);
-         return ResponseEntity.status(HttpStatus.OK).body(this.estudianteService.seleccionarPorCedula(cedula));
+         return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.estudianteService.seleccionarPorCedula(cedula));
+           
+    }
+
+    @GetMapping(path="/statusResponse/{cedula}") //no se debe colorcar status ()
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public Estudiante consultarPorCedulaStatus(@PathVariable String cedula){
+        
+         //return this.estudianteService.seleccionarPorCedula(cedula);
+         return this.estudianteService.seleccionarPorCedula(cedula);
            
     }
 
 
-    @PostMapping
+
+    @PostMapping(consumes = "application/xml")
     public void guardar(@RequestBody Estudiante estudiante){
         this.estudianteService.guardar(estudiante);
 

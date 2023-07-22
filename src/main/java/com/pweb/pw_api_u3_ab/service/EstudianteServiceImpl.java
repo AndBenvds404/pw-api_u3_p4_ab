@@ -53,6 +53,12 @@ public class EstudianteServiceImpl implements IEstudianteService {
     public void actualizarParcial(String cedula, String nuevaCedula) {
         this.estudianteRepository.actualizarParcial(cedula, nuevaCedula);
     }
+
+    @Override
+    public Integer guardarDevolver(Estudiante estudiante) {
+        // TODO Auto-generated method stub
+        return this.estudianteRepository.insertarDevolver(estudiante);
+    }
 }
 
 

@@ -80,6 +80,22 @@ public class EstudianteRepositoryImpl implements IEstudianteRepository {
         return mQuery.getResultList();
     }
 
+    @Override
+    public String insertarDevolver(Estudiante estudiante) {
+        
+            Estudiante e  = new Estudiante();
+             e.setApellido( estudiante.getApellido());
+           
+
+
+            this.entitymanager.persist(estudiante);
+           
+            return this.entitymanager.find(String.class,e.getApellido());
+            
+        
+        
+    }
+
     
 
 
