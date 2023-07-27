@@ -81,19 +81,11 @@ public class EstudianteRepositoryImpl implements IEstudianteRepository {
     }
 
     @Override
-    public String insertarDevolver(Estudiante estudiante) {
+    public Estudiante insertarDevolver(Estudiante estudiante) {
         
-            Estudiante e  = new Estudiante();
-             e.setApellido( estudiante.getApellido());
-           
-
-
             this.entitymanager.persist(estudiante);
-           
-            return this.entitymanager.find(String.class,e.getApellido());
-            
-        
-        
+            return this.entitymanager.find(Estudiante.class,estudiante.getId());
+               
     }
 
     

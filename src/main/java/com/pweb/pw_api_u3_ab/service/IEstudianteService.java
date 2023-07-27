@@ -4,14 +4,15 @@ package com.pweb.pw_api_u3_ab.service;
 import java.util.List;
 
 import com.pweb.pw_api_u3_ab.repository.modelo.Estudiante;
+import com.pweb.pw_api_u3_ab.service.to.EstudianteTO;
 
 public interface IEstudianteService {
 
    public Estudiante seleccionarPorCedula(String cedula);
 
    public void guardar(Estudiante estudiante);
-   
-   public Integer guardarDevolver(Estudiante estudiante);
+
+   public Estudiante guardarDevolver(Estudiante estudiante);
 
     public void actualizar (Estudiante estudiante);
     
@@ -22,5 +23,7 @@ public interface IEstudianteService {
     public List<Estudiante> buscarTodos();
     
     public List<Estudiante> buscarTodosProvincia (String provincia);
+
+    public List<EstudianteTO> buscarTodosHateoas();
 
 }

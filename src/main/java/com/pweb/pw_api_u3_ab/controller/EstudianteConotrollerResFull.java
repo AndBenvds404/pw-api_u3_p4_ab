@@ -3,6 +3,7 @@ package com.pweb.pw_api_u3_ab.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import com.pweb.pw_api_u3_ab.repository.modelo.Estudiante;
 import com.pweb.pw_api_u3_ab.service.IEstudianteService;
 /*
@@ -29,6 +32,8 @@ import com.pweb.pw_api_u3_ab.service.IEstudianteService;
     "cedula": "1727093003"
 }
  */
+import com.pweb.pw_api_u3_ab.service.to.EstudianteTO;
+import com.pweb.pw_api_u3_ab.service.to.MateriaTo;
 
 @RestController
 @RequestMapping("/estudiantes")
@@ -40,6 +45,7 @@ public class EstudianteConotrollerResFull {
     private IEstudianteService estudianteService;
 
     //GET
+    //Produces - Devuelve dato en algun formato
     @GetMapping(path="/{cedula}",produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<Estudiante> consultarPorCedula(@PathVariable String cedula){
         
@@ -48,12 +54,7 @@ public class EstudianteConotrollerResFull {
            
     }
 
-    //post y get
-
-    @PostMapping(path = "/buscarDevolver", consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
-    public String consultarDevolder(@RequestBody Estudiante estudiante){
-        return this.estudianteService.guardarDevolver(estudiante);
-    }
+    
 
     //ejemplo
      @GetMapping(path="/status/{cedula}") //no se debe colorcar status ()
@@ -122,4 +123,33 @@ public class EstudianteConotrollerResFull {
         public List<Estudiante> buscarProvincia(@RequestParam String provincia){
         return this.estudianteService.buscarTodosProvincia(provincia);
     }
+
+
+
+    //post y get CONSUMES Y PRODUCES
+    @PostMapping(path = "/buscarDevolver", consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
+    public Estudiante consultarDevolder(@RequestBody Estudiante estudiante){
+        return this.estudianteService.guardarDevolver(estudiante);
+    }
+
+
+    //NIVEL 3 MMR HATEOAS
+    @GetMapping(path = "/hateoas")
+        public ResponseEntity <List<EstudianteTO>> buscarTodosHATEOAS(){
+        List<EstudianteTO> lista = this.estudianteService.buscarTodosHateoas();
+
+            for (EstudianteTO e : lista) {
+            Link myLink = linkTo(methodOn(EstudianteConotrollerResFull.class).buscarPorEstudiante(e.getCedula())).withRel("materias");
+            e.add(myLink);
+         }   
+
+        return new ResponseEntity<List<EstudianteTO>>(lista, null, 200);
+    }
+
+    @GetMapping(path = "/{cedula}/materias")
+    public ResponseEntity <List<MateriaTo>> buscarPorEstudiante(@PathVariable String cedula){
+        //las materias de un estudiante q es buscado por cedula
+        return null;
+    }
+
 }
