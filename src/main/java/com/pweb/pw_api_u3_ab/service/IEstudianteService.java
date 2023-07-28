@@ -4,6 +4,7 @@ package com.pweb.pw_api_u3_ab.service;
 import java.util.List;
 
 import com.pweb.pw_api_u3_ab.repository.modelo.Estudiante;
+import com.pweb.pw_api_u3_ab.repository.modelo.Materia;
 import com.pweb.pw_api_u3_ab.service.to.EstudianteTO;
 
 public interface IEstudianteService {
@@ -25,5 +26,7 @@ public interface IEstudianteService {
     public List<Estudiante> buscarTodosProvincia (String provincia);
 
     public List<EstudianteTO> buscarTodosHateoas();
+
+    public Materia seleccionarMateriasPorId(Integer id);
 
 }

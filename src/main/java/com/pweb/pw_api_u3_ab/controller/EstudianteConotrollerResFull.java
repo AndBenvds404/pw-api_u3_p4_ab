@@ -24,6 +24,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import com.pweb.pw_api_u3_ab.repository.modelo.Estudiante;
 import com.pweb.pw_api_u3_ab.service.IEstudianteService;
+import com.pweb.pw_api_u3_ab.service.IMateriaService;
 /*
   {
     "nombre": "Andres Actualizado",
@@ -43,6 +44,9 @@ public class EstudianteConotrollerResFull {
 
     @Autowired
     private IEstudianteService estudianteService;
+
+    @Autowired
+    private IMateriaService materiaService;
 
     //GET
     //Produces - Devuelve dato en algun formato
@@ -146,10 +150,10 @@ public class EstudianteConotrollerResFull {
         return new ResponseEntity<List<EstudianteTO>>(lista, null, 200);
     }
 
-    @GetMapping(path = "/{cedula}/materias")
+    @GetMapping(path = "/{cedula}/materias", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity <List<MateriaTo>> buscarPorEstudiante(@PathVariable String cedula){
         //las materias de un estudiante q es buscado por cedula
-        return null;
+        return new ResponseEntity<List<MateriaTo>>( this.materiaService.buscarPorCedulaEstudainte(cedula), null, 220);
     }
 
 }

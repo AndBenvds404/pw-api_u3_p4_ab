@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import org.springframework.hateoas.RepresentationModel;
 
 public class EstudianteTO extends RepresentationModel<EstudianteTO> implements    Serializable{
+
     private static final long serialVersion = 1L; 
 
     private Integer id;
