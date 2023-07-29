@@ -27,14 +27,7 @@ public class MateriaServiceImpl implements IMateriaService{
 
     }
 
-   @Override
-    public MateriaTo buscarMateriaPorId(Integer id) {
-        
-        MateriaTo mate = this.buscarMateriaPorId(id);
-       
-        return mate;
 
-    }
 
     
 
@@ -47,6 +40,36 @@ public class MateriaServiceImpl implements IMateriaService{
     
         return mateTo;
     }
+
+
+
+
+
+	@Override
+	public MateriaTo buscarMateriaPorId(Integer id) {
+		
+		return this.convertir(this.materiaRepositoryImpl.buscarPorMateriasId(id));
+	}
+
+
+
+
+
+	@Override
+	public void guardar(Materia materia) {
+		// TODO Auto-generated method stub
+		this.materiaRepositoryImpl.insertar(materia);
+	}
+
+
+
+
+
+	@Override
+	public Materia buscarPorId(Integer id) {
+		// TODO Auto-generated method stub
+		return this.materiaRepositoryImpl.buscarPorMateriasId(id);
+	}
 
 
 

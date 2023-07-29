@@ -31,11 +31,10 @@ public class MateriaControllerResfull {
     }
     
 
-     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Materia> consultarPorCedula(@PathVariable Integer id){
+     @GetMapping(path="/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MateriaTo> consultarPorCedula(@PathVariable Integer id){
         
-         //return this.estudianteService.seleccionarPorCedula(cedula);
-         return ResponseEntity.status(227).body(this.materiaServiceImpl.);
+         return ResponseEntity.status(227).body(this.materiaServiceImpl.buscarMateriaPorId(id));
            
     }
 

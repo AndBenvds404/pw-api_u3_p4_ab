@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.pweb.pw_api_u3_ab.repository.IEstudianteRepository;
 import com.pweb.pw_api_u3_ab.repository.modelo.Estudiante;
+import com.pweb.pw_api_u3_ab.repository.modelo.Materia;
 import com.pweb.pw_api_u3_ab.service.to.EstudianteTO;
 
 @Service
@@ -87,6 +88,12 @@ public class EstudianteServiceImpl implements IEstudianteService {
 
 
     }
+
+	@Override
+	public Materia seleccionarMateriasPorId(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
 

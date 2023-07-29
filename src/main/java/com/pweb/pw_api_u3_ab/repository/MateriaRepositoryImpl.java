@@ -26,19 +26,25 @@ public class MateriaRepositoryImpl implements IMateriaRepository{
         return myQuery.getResultList();
     }
 
+	@Override
+	public Materia buscarPorMateriasId(Integer id) {
+		// TODO Auto-generated method stub
+		TypedQuery<Materia> myQuery = this.entityManager.createQuery("SELECT m FROM Materia m WHERE m.id = :datoId",
+				Materia.class);
+		myQuery.setParameter("datoId", id);
+		return myQuery.getSingleResult();
+	}
 
-    @Override
-    public Materia buscarPorMateriasId(Materia materia) {
+	@Override
+	public void insertar(Materia materia) {
+		// TODO Auto-generated method stub
+		this.entityManager.persist(materia);
+		
+	}
 
-           return this.entityManager.find(Materia.class, materia.getId());
-    }
 
 
-    @Override
-    public List<Materia> buscarTodosMaterias() {
-        var mQuery = this.entityManager.createQuery("SELECT e FROM Materia e ",Materia.class);
-        return mQuery.getResultList();
-    }
+
     
 
 

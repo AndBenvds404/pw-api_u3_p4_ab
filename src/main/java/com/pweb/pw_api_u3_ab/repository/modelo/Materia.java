@@ -1,5 +1,7 @@
 package com.pweb.pw_api_u3_ab.repository.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class Materia {
     String creditos;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "id_estudiante")
     private Estudiante estudiante;
     

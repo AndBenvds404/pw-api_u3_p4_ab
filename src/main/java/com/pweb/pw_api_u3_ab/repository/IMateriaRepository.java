@@ -7,6 +7,6 @@ import com.pweb.pw_api_u3_ab.repository.modelo.Materia;
 
 public interface IMateriaRepository {
     public List<Materia> buscarPorCedulaEstudiante(String cedula);
-    public Materia buscarPorMateriasId(Materia materia);
-    public List<Materia> buscarTodosMaterias();
+    public Materia buscarPorMateriasId(Integer id);
+    public void insertar (Materia materia);
 }
