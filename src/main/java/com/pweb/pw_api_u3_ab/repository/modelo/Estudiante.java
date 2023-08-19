@@ -3,26 +3,24 @@ package com.pweb.pw_api_u3_ab.repository.modelo;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="estudiante")
+@Table(name = "estudiante")
 public class Estudiante {
-    
 
     @Id
-	@Column(name = "estu_id")
+    @Column(name = "estu_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estu_seq_id")
-	@SequenceGenerator(name = "estu_seq_id", sequenceName = "estu_seq_id", allocationSize = 1)
-	private Integer id;
+    @SequenceGenerator(name = "estu_seq_id", sequenceName = "estu_seq_id", allocationSize = 1)
+    private Integer id;
 
     @Column(name = "estu_nombre")
     private String nombre;
@@ -44,8 +42,6 @@ public class Estudiante {
 
     // Getters y Setters
 
-    
-
     public Integer getId() {
         return id;
     }
@@ -53,7 +49,7 @@ public class Estudiante {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     public String getCedula() {
         return cedula;
     }

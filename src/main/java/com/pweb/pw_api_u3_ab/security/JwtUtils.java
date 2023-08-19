@@ -1,15 +1,14 @@
 package com.pweb.pw_api_u3_ab.security;
 
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
 
 @Component
 public class JwtUtils {
@@ -21,9 +20,21 @@ public class JwtUtils {
 
     public boolean validateJwtToken(String token) {
 
-        Jwts.parser().setSigningKey(jwtSecreat).parseClaimsJws(token);
+        try {
+            Jwts.parser().setSigningKey(jwtSecreat).parseClaimsJws(token);
 
-        return true;
+        } catch (ExpiredJwtException e) {
+            // TODO: handle exception
+            LOG.error(e.getMessage());
+        } catch (SignatureException e) {
+            LOG.error(e.getMessage());
+        }
+
+        return false;
+    }
+
+    public String getUsernameFromJwtToken(String token) {
+        return Jwts.parser().setSigningKey(jwtSecreat).parseClaimsJws(token).getBody().getSubject();
     }
 
 }
