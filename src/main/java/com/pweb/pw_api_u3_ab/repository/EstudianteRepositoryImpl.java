@@ -2,15 +2,14 @@ package com.pweb.pw_api_u3_ab.repository;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
 
 import com.pweb.pw_api_u3_ab.repository.modelo.Estudiante;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
@@ -45,7 +44,7 @@ public class EstudianteRepositoryImpl implements IEstudianteRepository {
     @Override
     public void actualizarParcial(String cedula, String cedulaNueva) {
        
-        Query mQuery = this.entitymanager.createQuery("UPDATE Estudiante e SET e.cedula =: datoCedula WHERE e.cedula =:datoCondicion");
+        var mQuery = this.entitymanager.createQuery("UPDATE Estudiante e SET e.cedula =: datoCedula WHERE e.cedula =:datoCondicion");
         mQuery.setParameter("datoCedula", cedulaNueva);
         mQuery.setParameter("datoCondicion",cedula );
         mQuery.executeUpdate();
